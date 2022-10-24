@@ -13,5 +13,5 @@ jobs:
         uses: ./ # Uses an action in the root directory
         id: hello
         with:
-          draft: true
+          draft_release: true
           generate_release_notes: true
