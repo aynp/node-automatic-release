@@ -1,3 +1,5 @@
+name: Test Node Automatic Release
+
 on: workflow_dispatch
 
 jobs:
