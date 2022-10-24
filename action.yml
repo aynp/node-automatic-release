@@ -1,13 +1,19 @@
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'Node Automatic Release'
+description: 'Automatically generate a new release for your node project when the version in your package.json changes.'
 inputs:
-  who-to-greet: # id of input
-    description: 'Who to greet'
-    required: true
-    default: 'World'
+  token:
+    description: Personal access token. Defaults to GITHUB_TOKEN.
+    default: ${{ github.token }}
+    required: false
+  draft-release:
+    description: 'Whether to create a draft release or published one.'
+    required: false
+    default: true
+  generate_release_notes:
+    description: 'Whether to automatically generate the name and body for this release.'
+    required: false
+    default: true
 outputs:
-  time: # id of output
-    description: 'The time we greeted you'
 runs:
   using: 'node16'
   main: 'index.js'
