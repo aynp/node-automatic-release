@@ -2,8 +2,9 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 
 const token = core.getInput('token');
-const draft = core.getInput('draft');
-const generate_release_notes = core.getInput('generate_release_notes');
+const draft_release = core.getInput('draft_release') === 'true';
+const generate_release_notes =
+  core.getInput('generate_release_notes') === 'true';
 
 const octokit = github.getOctokit(token);
 const context = github.context;
@@ -35,7 +36,7 @@ async function main() {
       name: newVersion,
       previous_tag_name: previousVersion,
       generate_release_notes: generate_release_notes,
-      draft: draft,
+      draft: draft_release,
     });
   } catch (err) {
     core.setFailed(`Failed to create a release. ${err}`);
