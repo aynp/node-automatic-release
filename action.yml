@@ -1,19 +1,19 @@
-name: "Node Automatic Release"
-description: "Automatically generate a new release for your node project when the version in your package.json changes."
+name: 'Node Automatic Release'
+description: 'Automatically generate a new release for your node project when the version in your package.json changes.'
 inputs:
   token:
     description: Personal access token. Defaults to GITHUB_TOKEN.
     default: ${{ github.token }}
     required: false
   draft_release:
-    description: "Whether to create a draft release or published one."
+    description: 'Whether to create a draft release or published one.'
     required: false
-    default: "true"
+    default: 'true'
   generate_release_notes:
-    description: "Whether to automatically generate the name and body for this release."
+    description: 'Whether to automatically generate the name and body for this release.'
     required: false
-    default: "true"
+    default: 'true'
 # outputs:
 runs:
-  using: "node16"
-  main: "index.js"
+  using: 'node16'
+  main: 'index.js'
