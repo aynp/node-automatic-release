@@ -9528,7 +9528,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 const fs_1 = __nccwpck_require__(7147);
 const core_1 = __importDefault(__nccwpck_require__(8605));
 const github_1 = __importDefault(__nccwpck_require__(8389));
-const token = core_1.default.getInput('token');
+const token = core_1.default.getInput('token') || '';
 const draft_release = core_1.default.getInput('draft_release') === 'true';
 const generate_release_notes = core_1.default.getInput('generate_release_notes') === 'true';
 const octokit = github_1.default.getOctokit(token);
