@@ -1,5 +1,8 @@
 name: 'Node Automatic Release'
 description: 'Automatically generate a new release for your node project when the version in your package.json changes.'
+branding:
+  icon: play-circle
+  color: purple
 inputs:
   token:
     description: Personal access token. Defaults to GITHUB_TOKEN.
