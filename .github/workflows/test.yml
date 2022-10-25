@@ -1,6 +1,12 @@
 name: Test Node Automatic Release
 
-on: workflow_dispatch
+on:
+  # When a change is pushed to package.json in main branch
+  push:
+    branches: ['main']
+    paths: ['package.json']
+  # Manual run
+  workflow_dispatch:
 
 jobs:
   node-automatic-release:
