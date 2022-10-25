@@ -42,7 +42,7 @@ jobs:
 
 ## Publishing to NPM
 
-This action works seamlessly with [Publishing packages to the npm registry](https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages#publishing-packages-to-the-npm-registry) guide or the default `Publish Node.js Package` workflow template by GitHub.
+This action works seamlessly with [Publishing packages to the npm registry](https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages#publishing-packages-to-the-npm-registry) guide or the default [`Publish Node.js Package` workflow](https://github.com/actions/starter-workflows/blob/main/ci/npm-publish.yml) template by GitHub.
 
 Both these workflows run after a new release is created.
 
