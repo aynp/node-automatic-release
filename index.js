@@ -23,6 +23,9 @@ async function main() {
     previousVersion = data[0].tag_name;
   }
 
+  core.notice(`Previous version: ${previousVersion}`);
+  core.notice(`New version: ${newVersion}`);
+
   if (previousVersion === newVersion) {
     core.setFailed(`Version did not change`);
     return;
