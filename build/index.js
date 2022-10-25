@@ -9507,6 +9507,61 @@ function wrappy (fn, cb) {
 
 /***/ }),
 
+/***/ 4281:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const fs_1 = __nccwpck_require__(7147);
+const core_1 = __importDefault(__nccwpck_require__(8605));
+const github_1 = __importDefault(__nccwpck_require__(8389));
+const token = core_1.default.getInput('token');
+const draft_release = core_1.default.getInput('draft_release') === 'true';
+const generate_release_notes = core_1.default.getInput('generate_release_notes') === 'true';
+const octokit = github_1.default.getOctokit(token);
+const context = github_1.default.context;
+function main() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const { version: newVersion } = JSON.parse((0, fs_1.readFileSync)('package.json', 'utf8'));
+        const { data } = yield octokit.rest.repos.listReleases(Object.assign(Object.assign({}, context.repo), { per_page: 1 }));
+        let previousVersion = '';
+        if (data.length !== 0) {
+            previousVersion = data[0].tag_name;
+        }
+        core_1.default.notice(`Previous version: ${previousVersion}`);
+        core_1.default.notice(`New version: ${newVersion}`);
+        if (previousVersion === newVersion) {
+            core_1.default.setFailed(`Version did not change`);
+            return;
+        }
+        // Publishing release
+        try {
+            core_1.default.notice(`Publishing release ${newVersion}`);
+            octokit.rest.repos.createRelease(Object.assign(Object.assign({}, context.repo), { tag_name: newVersion, name: newVersion, previous_tag_name: previousVersion, generate_release_notes: generate_release_notes, draft: draft_release }));
+        }
+        catch (err) {
+            core_1.default.setFailed(`Failed to create a release. ${err}`);
+        }
+    });
+}
+main();
+
+
+/***/ }),
+
 /***/ 5306:
 /***/ ((module) => {
 
@@ -9681,63 +9736,12 @@ module.exports = JSON.parse('[[[0,44],"disallowed_STD3_valid"],[[45,46],"valid"]
 /******/ 	if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = __dirname + "/";
 /******/ 	
 /************************************************************************/
-var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
-(() => {
-const { readFileSync } = __nccwpck_require__(7147);
-const core = __nccwpck_require__(8605);
-const github = __nccwpck_require__(8389);
-
-const token = core.getInput('token');
-const draft_release = core.getInput('draft_release') === 'true';
-const generate_release_notes =
-  core.getInput('generate_release_notes') === 'true';
-
-const octokit = github.getOctokit(token);
-const context = github.context;
-
-async function main() {
-  const { version: newVersion } = JSON.parse(readFileSync('package.json'));
-
-  const { data } = await octokit.rest.repos.listReleases({
-    ...context.repo,
-    per_page: 1,
-  });
-
-  let previousVersion = '';
-
-  if (data.length !== 0) {
-    previousVersion = data[0].tag_name;
-  }
-
-  core.notice(`Previous version: ${previousVersion}`);
-  core.notice(`New version: ${newVersion}`);
-
-  if (previousVersion === newVersion) {
-    core.setFailed(`Version did not change`);
-    return;
-  }
-
-  // Publishing release
-  try {
-    core.notice(`Publishing release ${newVersion}`);
-    octokit.rest.repos.createRelease({
-      ...context.repo,
-      tag_name: newVersion,
-      name: newVersion,
-      previous_tag_name: previousVersion,
-      generate_release_notes: generate_release_notes,
-      draft: draft_release,
-    });
-  } catch (err) {
-    core.setFailed(`Failed to create a release. ${err}`);
-  }
-}
-
-main();
-
-})();
-
-module.exports = __webpack_exports__;
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module is referenced by other modules so it can't be inlined
+/******/ 	var __webpack_exports__ = __nccwpck_require__(4281);
+/******/ 	module.exports = __webpack_exports__;
+/******/ 	
 /******/ })()
 ;

@@ -1,6 +1,6 @@
-const { readFileSync } = require('fs');
-const core = require('@actions/core');
-const github = require('@actions/github');
+import { readFileSync } from 'fs';
+import core from '@actions/core';
+import github from '@actions/github';
 
 const token = core.getInput('token');
 const draft_release = core.getInput('draft_release') === 'true';
@@ -11,7 +11,9 @@ const octokit = github.getOctokit(token);
 const context = github.context;
 
 async function main() {
-  const { version: newVersion } = JSON.parse(readFileSync('package.json'));
+  const { version: newVersion } = JSON.parse(
+    readFileSync('package.json', 'utf8')
+  );
 
   const { data } = await octokit.rest.repos.listReleases({
     ...context.repo,
