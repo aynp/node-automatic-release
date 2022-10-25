@@ -1,6 +1,6 @@
 import { readFileSync } from 'fs';
-import core from '@actions/core';
-import github from '@actions/github';
+import * as core from '@actions/core';
+import * as github from '@actions/github';
 
 const token = core.getInput('token') || '';
 const draft_release = core.getInput('draft_release') === 'true';
