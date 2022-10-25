@@ -9647,7 +9647,7 @@ module.exports = JSON.parse('[[[0,44],"disallowed_STD3_valid"],[[45,46],"valid"]
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"name":"node-automatic-release","version":"v1.0.0","description":"Automatically generate a new release for your node project when the version in your package.json changes.","main":"index.js","scripts":{"test":"echo \\"Error: no test specified\\" && exit 1"},"repository":{"type":"git","url":"git+https://github.com/aynp/node-automatic-release.git"},"keywords":[],"author":{"name":"Aryan Pathania","username":"aynp","url":"https://aryanpathania.vercel.app/"},"license":"ISC","bugs":{"url":"https://github.com/aynp/node-automatic-release/issues"},"homepage":"https://github.com/aynp/node-automatic-release#readme","dependencies":{"@actions/core":"^1.10.0","@actions/github":"^5.1.1"}}');
+module.exports = JSON.parse('{"name":"node-automatic-release","version":"v1.0.1","description":"Automatically generate a new release for your node project when the version in your package.json changes.","main":"index.js","scripts":{"test":"echo \\"Error: no test specified\\" && exit 1"},"repository":{"type":"git","url":"git+https://github.com/aynp/node-automatic-release.git"},"keywords":[],"author":{"name":"Aryan Pathania","username":"aynp","url":"https://aryanpathania.vercel.app/"},"license":"ISC","bugs":{"url":"https://github.com/aynp/node-automatic-release/issues"},"homepage":"https://github.com/aynp/node-automatic-release#readme","dependencies":{"@actions/core":"^1.10.0","@actions/github":"^5.1.1"}}');
 
 /***/ })
 
@@ -9716,6 +9716,9 @@ async function main() {
   if (data.length !== 0) {
     previousVersion = data[0].tag_name;
   }
+
+  core.notice(`Previous version: ${previousVersion}`);
+  core.notice(`New version: ${newVersion}`);
 
   if (previousVersion === newVersion) {
     core.setFailed(`Version did not change`);
