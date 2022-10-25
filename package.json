@@ -1,6 +1,6 @@
 {
   "name": "node-automatic-release",
-  "version": "v1.0.0",
+  "version": "v1.0.1",
   "description": "Automatically generate a new release for your node project when the version in your package.json changes.",
   "main": "index.js",
   "scripts": {
