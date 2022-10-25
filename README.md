@@ -2,7 +2,7 @@
 
 Automatically generate a new release for your node project when the version in your `package.json` changes.
 
-## Marketplace Link - [node-automatic-release](https://github.com/marketplace/actions/node-automatic-release)
+**Marketplace Link - [node-automatic-release](https://github.com/marketplace/actions/node-automatic-release)**
 
 ## Usage
 
