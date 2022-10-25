@@ -9512,6 +9512,29 @@ function wrappy (fn, cb) {
 
 "use strict";
 
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -9521,18 +9544,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const fs_1 = __nccwpck_require__(7147);
-const core_1 = __importDefault(__nccwpck_require__(8605));
-const github_1 = __importDefault(__nccwpck_require__(8389));
-const token = core_1.default.getInput('token') || '';
-const draft_release = core_1.default.getInput('draft_release') === 'true';
-const generate_release_notes = core_1.default.getInput('generate_release_notes') === 'true';
-const octokit = github_1.default.getOctokit(token);
-const context = github_1.default.context;
+const core = __importStar(__nccwpck_require__(8605));
+const github = __importStar(__nccwpck_require__(8389));
+const token = core.getInput('token') || '';
+const draft_release = core.getInput('draft_release') === 'true';
+const generate_release_notes = core.getInput('generate_release_notes') === 'true';
+const octokit = github.getOctokit(token);
+const context = github.context;
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
         const { version: newVersion } = JSON.parse((0, fs_1.readFileSync)('package.json', 'utf8'));
@@ -9541,19 +9561,19 @@ function main() {
         if (data.length !== 0) {
             previousVersion = data[0].tag_name;
         }
-        core_1.default.notice(`Previous version: ${previousVersion}`);
-        core_1.default.notice(`New version: ${newVersion}`);
+        core.notice(`Previous version: ${previousVersion}`);
+        core.notice(`New version: ${newVersion}`);
         if (previousVersion === newVersion) {
-            core_1.default.setFailed(`Version did not change`);
+            core.setFailed(`Version did not change`);
             return;
         }
         // Publishing release
         try {
-            core_1.default.notice(`Publishing release ${newVersion}`);
+            core.notice(`Publishing release ${newVersion}`);
             octokit.rest.repos.createRelease(Object.assign(Object.assign({}, context.repo), { tag_name: newVersion, name: newVersion, previous_tag_name: previousVersion, generate_release_notes: generate_release_notes, draft: draft_release }));
         }
         catch (err) {
-            core_1.default.setFailed(`Failed to create a release. ${err}`);
+            core.setFailed(`Failed to create a release. ${err}`);
         }
     });
 }
