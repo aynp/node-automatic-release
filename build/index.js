@@ -9704,7 +9704,7 @@ const octokit = github.getOctokit(token);
 const context = github.context;
 
 async function main() {
-  const { newVersion } = __nccwpck_require__(4147);
+  const { version: newVersion } = __nccwpck_require__(4147);
 
   const { data } = await octokit.rest.repos.listReleases({
     ...context.repo,
