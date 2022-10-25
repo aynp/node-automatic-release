@@ -3,7 +3,7 @@ name: Test Node Automatic Release
 on: workflow_dispatch
 
 jobs:
-  hello_world_job:
+  node-automatic-release:
     runs-on: ubuntu-latest
     name: Automatic Release
     steps:
@@ -13,8 +13,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Automatic release
         uses: ./ # Uses an action in the root directory
-        id: hello
+        id: test-action
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           draft_release: true
           generate_release_notes: true
