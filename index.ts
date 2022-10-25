@@ -2,7 +2,7 @@ import { readFileSync } from 'fs';
 import core from '@actions/core';
 import github from '@actions/github';
 
-const token = core.getInput('token');
+const token = core.getInput('token') || '';
 const draft_release = core.getInput('draft_release') === 'true';
 const generate_release_notes =
   core.getInput('generate_release_notes') === 'true';
