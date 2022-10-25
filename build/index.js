@@ -9724,6 +9724,7 @@ async function main() {
 
   // Publishing release
   try {
+    core.notice(`Publishing release ${newVersion}`);
     octokit.rest.repos.createRelease({
       ...context.repo,
       tag_name: newVersion,
