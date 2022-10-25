@@ -10,7 +10,7 @@ const octokit = github.getOctokit(token);
 const context = github.context;
 
 async function main() {
-  const { newVersion } = require('./package.json');
+  const { version: newVersion } = require('./package.json');
 
   const { data } = await octokit.rest.repos.listReleases({
     ...context.repo,
@@ -30,6 +30,7 @@ async function main() {
 
   // Publishing release
   try {
+    core.notice(`Publishing release ${newVersion}`);
     octokit.rest.repos.createRelease({
       ...context.repo,
       tag_name: newVersion,
