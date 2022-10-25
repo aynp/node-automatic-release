@@ -1,3 +1,4 @@
+const { readFileSync } = require('fs');
 const core = require('@actions/core');
 const github = require('@actions/github');
 
@@ -10,7 +11,7 @@ const octokit = github.getOctokit(token);
 const context = github.context;
 
 async function main() {
-  const { version: newVersion } = require('./package.json');
+  const { version: newVersion } = JSON.parse(readFileSync('package.json'));
 
   const { data } = await octokit.rest.repos.listReleases({
     ...context.repo,
