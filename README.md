@@ -42,8 +42,6 @@ jobs:
 
 ## Publishing to NPM
 
-This action works seamlessly with [Publishing packages to the npm registry](https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages#publishing-packages-to-the-npm-registry) guide or the default [`Publish Node.js Package` workflow](https://github.com/actions/starter-workflows/blob/main/ci/npm-publish.yml) template by GitHub.
+This action can be used with [Publishing packages to the npm registry](https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages#publishing-packages-to-the-npm-registry) guide or the default [`Publish Node.js Package` workflow](https://github.com/actions/starter-workflows/blob/main/ci/npm-publish.yml) template by GitHub to automatically publish to NPM when version in `package.json` changes.
 
-Both these workflows run after a new release is created.
-
-You can use either of the two workflows above in addition to this one to seamlessly publish your package to NPM whenever `package.json` version changes.
+You can read more about it here - [automatic-npm-publish](https://aryanpathania.vercel.app/blog/automatic-npm-publish)
